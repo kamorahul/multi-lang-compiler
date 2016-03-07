@@ -1,0 +1,109 @@
+<html>
+<head>
+    <style type="text/css" media="screen">
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 48%;
+            bottom:15%;
+            left: 0;
+        }
+        #terminal{
+            position: absolute;
+            top: 42%;
+            right: 0%;
+            bottom:0%;
+            left: 53%;
+
+        }
+        #chatbox{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom:57%;
+            left: 53%;
+            background-color: #333333;
+        }
+        .footer{
+            margin-top: 44%;
+            
+            
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="editor">function name(name){
+    console.log("hello world")
+    }
+    </div>
+
+    <div id="chatbox">
+        <div style="margin-top: 3%;margin-left: 2%;float: left;">
+        <input value="Share Workspace" onclick="" type="button"></div>
+        <div style="margin-top: 3%;margin-left: 4%">
+        <input value="Video" onclick="" type="button">
+
+        </div>
+        <div>
+
+            <!--<h1>Video Chat</h1>-->
+            <div style="float: left;margin-top: 2%">
+            <video id="localVideo" height="150" autoplay></video>
+               <div><span>Me</span></div>
+            </div>
+
+            <div>
+            <video id="remoteVideo" height="150" autoplay></video>
+               <div><span>Client</span></div>
+            </div>
+
+
+        </div>
+        <div>
+            <button id="start">Get Video</button>
+            <button id="call" disabled="disabled">Call</button>
+            <button id="hangup" disabled="disabled">Call</button>
+        </div>
+
+    </div>
+    <div id="terminal">
+
+
+    </div>
+    <footer class="footer">
+    <input type="button" onclick="sendCode()" value="Execute">
+    <span id="output"></span>
+    </footer>
+</div>
+<script src="../ace-builds/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="../public/jquery-1.12.0.min.js"></script>
+<script src="../socket.io/socket.io.js"></script>
+<script src="../public/adapter.js"></script>
+<script src="../public/app.js"></script>
+
+
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+     function sendCode(){
+        var data=   editor.getValue();
+         $.ajax({
+             url: "http://127.0.0.1:3000/compile/node?data="+data
+
+         }).done(function(result) {
+             console.log("Done"+result);
+//             $("#output").append('<li><span class="tab">'+result+'</span></li>');
+             $("#output").text(result)
+         });
+
+
+     }
+    var terminalEditor = ace.edit("terminal");
+    editor.setTheme("ace/theme/monokai");
+
+</script>
+
+</body>
+</html>
