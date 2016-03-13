@@ -40,7 +40,9 @@
 
     <div id="chatbox">
         <div style="margin-top: 3%;margin-left: 2%;float: left;">
-        <input value="Share Workspace" onclick="" type="button"></div>
+        <input value="Share Workspace" onclick="initilizeWorkspace()" type="button"></div>
+        <div style="margin-top: 3%;margin-left: 2%;float: left;">
+        <input value="Join Group" onclick="joinGroup()" type="button"></div>
         <div style="margin-top: 3%;margin-left: 4%">
         <input value="Video" onclick="" type="button">
 
@@ -81,29 +83,10 @@
 <script src="../socket.io/socket.io.js"></script>
 <script src="../public/adapter.js"></script>
 <script src="../public/app.js"></script>
+<script src="../public/editor.js"></script>
+<script src="../public/workspace.js"></script>
 
 
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-     function sendCode(){
-        var data=   editor.getValue();
-         $.ajax({
-             url: "http://139.162.50.21:3000/compile/node?data="+data
-
-         }).done(function(result) {
-             console.log("Done"+result);
-//             $("#output").append('<li><span class="tab">'+result+'</span></li>');
-             $("#output").text(result)
-         });
-
-
-     }
-    var terminalEditor = ace.edit("terminal");
-    editor.setTheme("ace/theme/monokai");
-
-</script>
 
 </body>
 </html>

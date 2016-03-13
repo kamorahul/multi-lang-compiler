@@ -29,7 +29,7 @@ Route.get('/node',function(req,res){
              return compile(result);
          }
      }).then(function(result){
-         res.send(result+data)
+         res.send(result)
      })
 });
 
