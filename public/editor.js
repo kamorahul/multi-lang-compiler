@@ -17,7 +17,7 @@ function sendCode(){
     var data=   editor.getValue();
     $.ajax({
         //url: "http://139.162.50.21:3000/compile/node?data="+data
-        url: "http://127.0.0.1:3000/compile/node?data="+data
+        url: "http://139.162.50.21:3000/compile/node?data="+data
 
     }).done(function(result) {
         console.log("Done"+result);
@@ -28,3 +28,7 @@ function sendCode(){
 
 
 
+editor.on("change",function(e){
+
+
+})
